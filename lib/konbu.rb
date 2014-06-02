@@ -1,5 +1,8 @@
-require "konbu/version"
+# coding: utf-8
 
-module Konbu
-  # Your code goes here...
-end
+require "./konbu/version.rb"
+require "./konbu/AI.rb"
+require "./konbu/AIbuilder.rb"
+
+maker = AImaker.new
+maker.say

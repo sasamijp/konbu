@@ -8,10 +8,10 @@ Gem::Specification.new do |spec|
   spec.version       = Konbu::VERSION
   spec.authors       = ["sasamijp"]
   spec.email         = ["k.seiya28@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Conversation AI}
+  spec.summary       = %q{コンブセーションｗ}
   spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.license       = "WTFPL"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
