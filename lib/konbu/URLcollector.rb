@@ -8,10 +8,11 @@ module Konbu
 
     # name should be written in kanji or hiragana
     def collect(name, pagecount)
+      urls = []
       collectmatomeURLs(name, pagecount).each do |matome|
         urls.push extractURLs(matome)
       end
-      return urls
+      return urls.flatten
     end
 
   private

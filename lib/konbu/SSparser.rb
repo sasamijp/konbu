@@ -24,8 +24,6 @@ module Konbu
       return ss.delete_if{|hash| hash['name'].nil? or hash['serif'].nil? or hash['in_reply_to'].nil?}
     end
 
-  private
-
     def extractBody(url)
       open(url) do |io|
         html = io.read
@@ -37,7 +35,7 @@ module Konbu
         return strs
       end
     end
-
+  private
     def isNamespace(str)
       if str.length >= 54
         namespace = str[0..54]
