@@ -4,7 +4,7 @@ require 'open-uri'
 
 module Konbu
 
-  module SSparser
+  class SSparser
 
     def parse(url)
       ss = []
