@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["k.seiya28@gmail.com"]
   spec.description   = %q{Conversation AI}
   spec.summary       = %q{コンブセーションｗ}
-  spec.homepage      = ""
+  spec.homepage      = "http://sasami.asia/"
   spec.license       = "WTFPL"
 
   spec.files         = `git ls-files`.split($/)
