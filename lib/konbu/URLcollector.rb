@@ -1,12 +1,16 @@
 # coding: utf-8
+require 'open-uri'
+require 'nokogiri'
 module Konbu
+
   class URLcollector
-    def initialize
 
-    end
-
-    def collect(name)
-
+    # name should be written in kanji or hiragana
+    def collect(name, pagecount)
+      collectmatomeURLs(name, pagecount).each do |matome|
+        urls.push extractURLs(matome)
+      end
+      return urls
     end
 
     private
@@ -32,4 +36,5 @@ module Konbu
     end
 
   end
+
 end

@@ -3,3 +3,4 @@
 require 'konbu/version'
 require 'konbu/AI'
 require 'konbu/URlCollector'
+require 'konbu/SSparser'

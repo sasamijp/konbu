@@ -1,4 +1,6 @@
 # -*- encoding: utf-8 -*-
+require 'exractcontent'
+require 'open-uri'
 
 class SSparser
 
@@ -44,10 +46,12 @@ class SSparser
   end
 
   def whoIsTalking(str)
-    return str[0..str.rindex("「")-1] end
+    return str[0..str.rindex("「")-1] 
+  end
 
   def extractSerif(str)
     name = whoIsTalking(str)
-    return str.sub("「","").reverse.sub("」","").reverse.sub(name, "") end
+    return str.sub("「","").reverse.sub("」","").reverse.sub(name, "") 
+  end
 
 end
