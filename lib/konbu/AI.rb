@@ -2,7 +2,6 @@
 
 module Konbu
   class AI
-    attr_accessor :respond
     def initialize(respond)
       @respond = respond
     end
