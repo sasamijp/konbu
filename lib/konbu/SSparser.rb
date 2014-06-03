@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require 'exractcontent'
+require 'extractcontent'
 require 'open-uri'
 
 class SSparser
