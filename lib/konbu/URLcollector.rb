@@ -4,7 +4,7 @@ require 'nokogiri'
 
 module Konbu
 
-  class URLcollector
+  module URLcollector
 
     # name should be written in kanji or hiragana
     def collect(name, pagecount)
