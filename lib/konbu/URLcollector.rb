@@ -1,6 +1,7 @@
 # coding: utf-8
 require 'open-uri'
 require 'nokogiri'
+
 module Konbu
 
   class URLcollector
@@ -13,7 +14,7 @@ module Konbu
       return urls
     end
 
-    private
+  private
 
     def collectmatomeURLs(name, pagecount)
       matomes = []
