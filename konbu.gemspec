@@ -23,4 +23,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "nokogiri"
   spec.add_dependency "extractcontent"
   spec.add_dependency "natto"
+  spec.add_dependency "parallel"
 end
