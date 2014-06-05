@@ -1,10 +1,16 @@
 # -*- encoding: utf-8 -*-
+
+require 'bundler/setup'
 require 'extractcontent'
 require 'open-uri'
 
 module Konbu
 
   class SSparser
+
+    def extracter
+      return ExtractContent.instance_methods()
+    end
 
     def parse(url)
       ss = []
@@ -27,7 +33,7 @@ module Konbu
     def extractBody(url)
       open(url) do |io|
         html = io.read
-        body, title = ExtractContent.analyse(html)
+        body, title = ExtractContent::analyse(html)
         strs = []
         body.split("  ").each do |str|
           strs.push(str) if str.include?("「") and !isNamespace(str)
@@ -35,7 +41,7 @@ module Konbu
         return strs
       end
     end
-  private
+
     def isNamespace(str)
       if str.length >= 54
         namespace = str[0..54]
@@ -57,3 +63,6 @@ module Konbu
   end
 
 end
+
+#parser = SSparser.new
+#p parser.parse("http://morikinoko.com/archives/51921724.html")

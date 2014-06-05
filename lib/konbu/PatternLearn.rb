@@ -1,6 +1,9 @@
 # -*- encoding: utf-8 -*-
 
 require 'natto'
+require 'extractcontent'
+require 'open-uri'
+
 require 'konbu/URLcollector'
 require 'konbu/SSparser'
 
