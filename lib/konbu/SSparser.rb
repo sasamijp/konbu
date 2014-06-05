@@ -8,15 +8,12 @@ module Konbu
 
   class SSparser
 
-    def extracter
-      return ExtractContent.instance_methods()
-    end
-
     def parse(url)
       ss = []
       target = nil
       body = extractBody(url)
       return nil if body == []
+      puts url
       body[0].split("\n").each do |str|
         next if (!str.include?("「") and !str.include?("」")) or isNamespace(str)
         hash = {
@@ -29,6 +26,8 @@ module Konbu
       end
       return ss.delete_if{|hash| hash['name'].nil? or hash['serif'].nil? or hash['in_reply_to'].nil?}
     end
+
+    private
 
     def extractBody(url)
       open(url) do |io|
@@ -52,11 +51,16 @@ module Konbu
     end
 
     def whoIsTalking(str)
-      return str[0..str.rindex("「")-1] 
+      begin
+        return str[0..str.rindex("「")-1] 
+      rescue
+        return nil
+      end
     end
 
     def extractSerif(str)
       name = whoIsTalking(str)
+      return nil if name.nil?
       return str.sub("「","").reverse.sub("」","").reverse.sub(name, "") 
     end
 

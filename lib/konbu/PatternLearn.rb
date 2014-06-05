@@ -3,7 +3,7 @@
 require 'natto'
 require 'extractcontent'
 require 'open-uri'
-
+require 'parallel'
 require 'konbu/URLcollector'
 require 'konbu/SSparser'
 

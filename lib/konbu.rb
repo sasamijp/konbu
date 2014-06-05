@@ -2,6 +2,7 @@
 require 'bundler/setup'
 require 'extractcontent'
 require 'open-uri'
+require 'parallel'
 require 'konbu/version'
 require 'konbu/AI'
 require 'konbu/URlCollector'
@@ -14,5 +15,7 @@ require 'konbu/PatternLearn'
 #co = Konbu::URLcollector.new
 #p co.collect("春香", 1)
 
-pl = Konbu::PatternLearn.new("春香", 1)
-p pl.learn
+learner = Konbu::PatternLearn.new("春香", 1)
+ai = Konbu::AI.new("haruka", "春香", learner.learn)
+
+

@@ -15,7 +15,7 @@ module Konbu
       return urls.flatten
     end
 
-  private
+    private
 
     def collectmatomeURLs(name, pagecount)
       matomes = []
