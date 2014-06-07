@@ -14,7 +14,8 @@ module Konbu
       body.gsub!("『","「")
       body.gsub!("｣","」")
       body.gsub!("』","」")
-      return parse(s)
+      #p body
+      return parse(body)
     end
 
     def parseURL(url)
@@ -27,17 +28,20 @@ module Konbu
 
     def parse(body)
       ss = []
-      target = nil
+      in_reply_to = nil
       body.split("\n").each do |str|
-        next if (!str.include?("「") and !str.include?("」")) or isNamespace(str) or hash_['name'] == whoIsTalking(str)
+        #p str
+        next if (!str.include?("「") and !str.include?("」")) or isNamespace(str)
+        #next if front['name'] == whoIsTalking(str)
         hash = {
-          "name" => whoIsTalking(str),
-          "serif" => extractSerif(str),
-          "in_reply_to" => hash_["in_reply_to"]
+          'name' => whoIsTalking(str),
+          'serif' => extractSerif(str),
+          'in_reply_to' => in_reply_to
         }
-        hash_ = hash
+        in_reply_to = hash['serif']
         ss.push hash
       end
+      #p ss
       return ss.delete_if{|hash| hash['name'].nil? or hash['serif'].nil? or hash['in_reply_to'].nil?}
     end
 

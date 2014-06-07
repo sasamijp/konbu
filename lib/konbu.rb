@@ -11,12 +11,12 @@ require 'konbu/SSparser'
 require 'konbu/PatternLearn'
 
 #pa = Konbu::SSparser.new
-#p pa.parse("http://morikinoko.com/archives/51921724.html")
+#p pa.parseTXT("a")
 
 #co = Konbu::URLcollector.new
 #p co.collect("春香", 1)
 
-learner = Konbu::PatternLearn.new("春香", 1)
-ai = Konbu::AI.new("haruka", "春香", learner.learn)
+#learner = Konbu::PatternLearn.new("春香", 1)
+#ai = Konbu::AI.new("haruka", "春香", learner.learn)
 
 
