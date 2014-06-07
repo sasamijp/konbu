@@ -20,9 +20,8 @@ module Konbu
     end
 
     def learn
-      @urlCollector.collect(@name, @pagecount).each do |url|
-        next if url.include?("2chmoeaitemu")
-        parsed = @parser.parse(url)
+      getSSURL.each do |url|
+        parsed = @parser.parseURL(url)
         next if parsed.nil?
         parsed.each do |hash|
           next if hash['name'] != @name
@@ -32,7 +31,20 @@ module Konbu
       return @respond
     end
 
+    def learnTXT
+      
+    end
+
     private
+
+    def getSSURL
+      urls = []
+      @urlCollector.collect(@name, @pagecount).each do |url|
+        next if url.include?("2chmoeaitemu")
+        urls.push url
+      end
+      return urls
+    end
 
     def extractKeyWords(str)
       return nil if str == nil

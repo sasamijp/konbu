@@ -14,14 +14,25 @@ module Konbu
       body.gsub!("『","「")
       body.gsub!("｣","」")
       body.gsub!("』","」")
-      #p body
       return parse(body)
     end
 
-    def parseURL(url)
-      body = extractBody(url)
-      return nil if body == []
-      return parse(body[0])
+    def parseURLs(*url)
+      parsed = []
+      urls = url
+      urls.each do |url|
+        body = extractBody(url)
+        next if body == []
+        parsed.push parse(body[0])
+      end
+      case parsed.length
+      when 0
+        return nil
+      when 1
+        return parsed[0]
+      else
+        return parsed
+      end
     end
 
     private
