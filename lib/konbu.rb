@@ -2,6 +2,7 @@
 require 'bundler/setup'
 require 'extractcontent'
 require 'open-uri'
+require 'sqlite3'
 require 'parallel'
 require 'konbu/version'
 require 'konbu/AI'

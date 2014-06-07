@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "extractcontent"
   spec.add_dependency "natto"
   spec.add_dependency "parallel"
+  spec.add_dependency "sqlite3"
 end

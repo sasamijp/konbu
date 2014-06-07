@@ -1,7 +1,10 @@
 # coding: utf-8
+require 'sqlite3'
 
 module Konbu
+
   class AI
+
     def initialize(name, nameJP, responds)
       @responds = responds
       @name = name
@@ -20,6 +23,7 @@ module Konbu
     end
 
     def save
+      db = SQLite3::Database.new("./#{@name}.db")
       
     end
 
@@ -64,4 +68,5 @@ module Konbu
     end
 
   end
+
 end

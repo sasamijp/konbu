@@ -8,26 +8,38 @@ module Konbu
 
   class SSparser
 
-    def parse(url)
-      ss = []
-      target = nil
+    def parseTXT(filename)
+      body = File.read(filename, :encoding => Encoding::UTF_8)
+      body.gsub!("｢","「")
+      body.gsub!("『","「")
+      body.gsub!("｣","」")
+      body.gsub!("』","」")
+      return parse(s)
+    end
+
+    def parseURL(url)
       body = extractBody(url)
       return nil if body == []
-      puts url
-      body[0].split("\n").each do |str|
-        next if (!str.include?("「") and !str.include?("」")) or isNamespace(str)
+      return parse(body[0])
+    end
+
+    private
+
+    def parse(body)
+      ss = []
+      target = nil
+      body.split("\n").each do |str|
+        next if (!str.include?("「") and !str.include?("」")) or isNamespace(str) or hash_['name'] == whoIsTalking(str)
         hash = {
           "name" => whoIsTalking(str),
           "serif" => extractSerif(str),
-          "in_reply_to" => target
+          "in_reply_to" => hash_["in_reply_to"]
         }
-        target = extractSerif(str)
+        hash_ = hash
         ss.push hash
       end
       return ss.delete_if{|hash| hash['name'].nil? or hash['serif'].nil? or hash['in_reply_to'].nil?}
     end
-
-    private
 
     def extractBody(url)
       open(url) do |io|

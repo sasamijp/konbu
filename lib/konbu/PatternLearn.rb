@@ -32,7 +32,7 @@ module Konbu
       return @respond
     end
 
-  private
+    private
 
     def extractKeyWords(str)
       return nil if str == nil
