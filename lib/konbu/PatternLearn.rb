@@ -15,35 +15,32 @@ module Konbu
       @urlCollector = URLcollector.new
       @parser = SSparser.new
       @name = name
-      @respond = []
       @pagecount = pagecount
     end
 
-    def learn
-      getSSURL.each do |url|
-        parsed = @parser.parseURL(url)
-        next if parsed.nil?
-        parsed.each do |hash|
-          next if hash['name'] != @name
-          @respond.push [hash['serif'], extractKeyWords(hash['in_reply_to'])]
-        end
-      end
-      return @respond
+    def autoLearn
+      parsed = @parser.parseURLs(@urlCollector.collect(@name, @pagecount))
+      return nil if parsed.nil?
+      return learn(parsed)
     end
 
-    def learnTXT
-      
+    def txtLearn(filename)
+      parsed = @parser.parse(filename)
+      return nil if parsed.nil?
+      return learn(parsed)
     end
 
     private
 
-    def getSSURL
-      urls = []
-      @urlCollector.collect(@name, @pagecount).each do |url|
-        next if url.include?("2chmoeaitemu")
-        urls.push url
+    def learn
+      respond = []
+      parsed.each do |thread|
+        thread.each do |hash|
+          next if hash['name'] != @name
+          respond.push [hash['serif'], extractKeyWords(hash['in_reply_to'])]
+        end
       end
-      return urls
+      return respond
     end
 
     def extractKeyWords(str)

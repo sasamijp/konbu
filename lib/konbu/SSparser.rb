@@ -28,8 +28,6 @@ module Konbu
       case parsed.length
       when 0
         return nil
-      when 1
-        return parsed[0]
       else
         return parsed
       end
@@ -41,9 +39,7 @@ module Konbu
       ss = []
       in_reply_to = nil
       body.split("\n").each do |str|
-        #p str
         next if (!str.include?("「") and !str.include?("」")) or isNamespace(str)
-        #next if front['name'] == whoIsTalking(str)
         hash = {
           'name' => whoIsTalking(str),
           'serif' => extractSerif(str),
@@ -52,7 +48,6 @@ module Konbu
         in_reply_to = hash['serif']
         ss.push hash
       end
-      #p ss
       return ss.delete_if{|hash| hash['name'].nil? or hash['serif'].nil? or hash['in_reply_to'].nil?}
     end
 
