@@ -18,5 +18,3 @@ require 'konbu/PatternLearn'
 
 #learner = Konbu::PatternLearn.new("春香", 1)
 #ai = Konbu::AI.new("haruka", "春香", learner.learn)
-
-
