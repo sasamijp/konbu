@@ -1,6 +1,7 @@
 # coding: utf-8
 require 'sqlite3'
 require 'konbu/keywordExtractor'
+require 'konbu/Saver'
 
 module Konbu
 
@@ -8,6 +9,7 @@ module Konbu
 
     def initialize(name, nameJP, responds)
       @tractor = KeywordExtractor.new
+      @saver = Saver.new
       @responds = responds
       @name = name
       @nameJP = nameJP
@@ -31,8 +33,8 @@ module Konbu
     end
 
     def save
-      db = SQLite3::Database.new("./#{@name}.db")
-      db.execute()
+      @saver.newRespondDB(@name)
+      @saver.insertRespond(@name, @responds)
     end
 
     private

@@ -16,7 +16,7 @@ module Konbu
       db.close()
     end
 
-    def insertResponds(dbname)
+    def insertResponds(dbname, responds)
       db = SQLite3::Database.new("./#{dbname}.db")
       responds.each do |respond|
         sql = "insert into respond values (?, ?)", respond[0], respond[1].join(",")
