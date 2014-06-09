@@ -12,7 +12,12 @@ module Konbu
         text response,
         text targets
       );
+      CREATE TABLE info (
+        text name,
+        text nameJP
+      );
       "
+      db.execute_batch(sql)
       db.close()
     end
 
@@ -22,6 +27,13 @@ module Konbu
         sql = "insert into respond values (?, ?)", respond[0], respond[1].join(",")
         db.execute(sql)
       end
+      db.close()
+    end
+
+    def insertNames(dbnames, names)
+      db = SQLite3::Database.new("./#{dbname}.db")
+      sql = "insert into names values (?, ?)", names[0], names[1]
+      db.execute(sql)
       db.close()
     end
 

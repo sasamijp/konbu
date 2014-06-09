@@ -1,4 +1,5 @@
 # coding: utf-8
+
 require 'sqlite3'
 require 'konbu/keywordExtractor'
 require 'konbu/Saver'
