@@ -1,11 +1,13 @@
 # coding: utf-8
 require 'sqlite3'
+require 'konbu/keywordExtractor'
 
 module Konbu
 
   class AI
 
     def initialize(name, nameJP, responds)
+      @tractor = KeywordExtractor.new
       @responds = responds
       @name = name
       @nameJP = nameJP
@@ -13,12 +15,12 @@ module Konbu
 
     def addResponds(responds)
       responds.each do |respond|
-        @responds.push respond
+        @responds << respond
       end
     end
 
     def respond(text)
-      input = extractKeyWords(text)
+      input = @tractor.extract(text)
       return nil if input.nil?
 
       hitwords = @responds.select{ |value| wordsMatch(value[1].split(","), input) != 0 }
@@ -30,7 +32,7 @@ module Konbu
 
     def save
       db = SQLite3::Database.new("./#{@name}.db")
-
+      db.execute()
     end
 
     private

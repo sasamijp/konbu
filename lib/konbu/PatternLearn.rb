@@ -6,6 +6,7 @@ require 'open-uri'
 require 'parallel'
 require 'konbu/URLcollector'
 require 'konbu/SSparser'
+require 'konbu/keywordExtractor'
 
 module Konbu
 
@@ -14,6 +15,7 @@ module Konbu
     def initialize(name, pagecount)
       @urlCollector = URLcollector.new
       @parser = SSparser.new
+      @tractor = KeywordExtractor.new
       @name = name
       @pagecount = pagecount
     end
@@ -33,14 +35,14 @@ module Konbu
     private
 
     def learn
-      respond = []
+      responds = []
       parsed.each do |thread|
         thread.each do |hash|
           next if hash['name'] != @name
-          respond.push [hash['serif'],  extractKeyWords(hash['in_reply_to'])]
+          responds.push [hash['serif'],  @tractor.extract(hash['in_reply_to'])]
         end
       end
-      return respond
+      return responds.delete_if{|respond| respond[0].nil? or respond[1].nil? }
     end
 
   end
