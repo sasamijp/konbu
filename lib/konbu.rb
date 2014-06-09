@@ -1,4 +1,5 @@
 # coding: utf-8
+
 require 'bundler/setup'
 require 'extractcontent'
 require 'open-uri'

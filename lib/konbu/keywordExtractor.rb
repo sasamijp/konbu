@@ -3,7 +3,7 @@ require 'natto'
 
 module Konbu
 
-  class keywordExtractor
+  class KeywordExtractor
 
     def initialize
       @nm = Natto::MeCab.new
@@ -11,7 +11,7 @@ module Konbu
 
     def extract(str)
       return nil if str == nil
-      return joinwords(wakati(str))
+      return joinWords(wakati(str))
     end
 
     private
@@ -28,11 +28,16 @@ module Konbu
       data = []
       nouns.each_with_index do |noun,l|
         next if l == 0
-        data.push(["#{nouns[l-1]}#{noun}", "#{noun}#{nouns[l+1]}"])
+        begin
+          data << [nouns[l-1]+noun, noun+nouns[l+1]]
+        rescue; break; end
       end
-      return data
+      return data.flatten
     end
 
   end
 
 end
+
+#ke = Konbu::KeywordExtractor.new()
+#p ke.extract("おはようございます、今日はいい天気です。")
