@@ -11,6 +11,7 @@ require 'konbu/URlCollector'
 require 'konbu/SSparser'
 require 'konbu/PatternLearn'
 require 'konbu/keywordExtractor'
+require 'konbu/Saver'
 
 #ke = Konbu::KeywordExtractor.new
 #p ke.extract("おはようございます、今日はいい天気です。")
