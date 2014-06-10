@@ -32,7 +32,6 @@ module Konbu
 
     def insertNames(dbname, *name)
       names = name
-      p names
       db = SQLite3::Database.new("./#{dbname}.db")
       sql = "insert into info values('#{names[0]}', '#{names[1]}')"
       db.execute(sql)

@@ -25,16 +25,15 @@ module Konbu
     def respond(text)
       input = @tractor.extract(text)
       return nil if input.nil?
-
       hitwords = @responds.select{ |value| wordsMatch(value[1].split(","), input) != 0 }
       hitwords.sort_by!{ |value| wordsMatch(value[1].split(","), input) }
       hitwords.map!{ |value| value = value[0] }
-
       return hitwords[0]
     end
 
     def save
       @saver.newRespondDB(@name)
+      @saver.insertNames(@name, @name, @nameJP)
       @saver.insertRespond(@name, @responds)
     end
 
