@@ -10,18 +10,17 @@ require 'konbu/keywordExtractor'
 
 module Konbu
 
-  class PatternLearn
+  class Pattern
 
     def initialize(name, pagecount)
       @urlCollector = URLcollector.new
       @parser = SSparser.new
       @tractor = KeywordExtractor.new
       @name = name
-      @pagecount = pagecount
     end
 
-    def autoLearn
-      parsed = @parser.parseURLs(@urlCollector.collect(@name, @pagecount))
+    def autoLearn(pagecount)
+      parsed = @parser.parseURLs(@urlCollector.collect(@name, pagecount))
       return nil if parsed.nil?
       return learn(parsed)
     end
