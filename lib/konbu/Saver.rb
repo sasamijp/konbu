@@ -24,15 +24,17 @@ module Konbu
     def insertResponds(dbname, responds)
       db = SQLite3::Database.new("./#{dbname}.db")
       responds.each do |respond|
-        sql = "insert into respond values (?, ?)", respond[0], respond[1].join(",")
+        sql = "insert into responds values('#{respond[0]}', '#{respond[1].join(",")}')"
         db.execute(sql)
       end
       db.close()
     end
 
-    def insertNames(dbnames, names)
+    def insertNames(dbname, *name)
+      names = name
+      p names
       db = SQLite3::Database.new("./#{dbname}.db")
-      sql = "insert into names values (?, ?)", names[0], names[1]
+      sql = "insert into info values('#{names[0]}', '#{names[1]}')"
       db.execute(sql)
       db.close()
     end
