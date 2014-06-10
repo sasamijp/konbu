@@ -9,12 +9,12 @@ module Konbu
       db = SQLite3::Database.new("./#{dbname}.db")
       sql = "
       CREATE TABLE responds (
-        text response,
-        text targets
+        response text,
+        targets text
       );
       CREATE TABLE info (
-        text name,
-        text nameJP
+        name text,
+        nameJP text
       );
       "
       db.execute_batch(sql)
