@@ -25,8 +25,8 @@ module Konbu
     def respond(text)
       input = @tractor.extract(text)
       return nil if input.nil?
-      hitwords = @responds.select{ |value| wordsMatch(value[1].split(","), input) != 0 }
-      hitwords.sort_by!{ |value| wordsMatch(value[1].split(","), input) }
+      hitwords = @responds.select{ |value| wordsMatch(value[1], input) != 0 }
+      hitwords.sort_by!{ |value| wordsMatch(value[1], input) }
       hitwords.map!{ |value| value = value[0] }
       return hitwords[0]
     end
@@ -34,7 +34,7 @@ module Konbu
     def save
       @saver.newRespondDB(@name)
       @saver.insertNames(@name, @name, @nameJP)
-      @saver.insertRespond(@name, @responds)
+      @saver.insertResponds(@name, @responds)
     end
 
     private
@@ -46,6 +46,7 @@ module Konbu
           match += 1 if word1 == word2
         end
       end
+      return 0 if words1.length == 0
       return match.to_f/words1.length.to_f
     end
 

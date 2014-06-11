@@ -12,7 +12,7 @@ module Konbu
 
   class Pattern
 
-    def initialize(name, pagecount)
+    def initialize(name)
       @urlCollector = URLcollector.new
       @parser = SSparser.new
       @tractor = KeywordExtractor.new
@@ -26,20 +26,19 @@ module Konbu
     end
 
     def txtLearn(filename)
-      parsed = @parser.parse(filename)
+      parsed = @parser.parseTXT(filename)
       return nil if parsed.nil?
       return learn(parsed)
     end
 
     private
 
-    def learn
+    def learn(parsed)
       responds = []
-      parsed.each do |thread|
-        thread.each do |hash|
-          next if hash['name'] != @name
-          responds.push [hash['serif'],  @tractor.extract(hash['in_reply_to'])]
-        end
+      p parsed
+      parsed.each do |hash|
+        next if hash['name'] != @name
+        responds.push [hash['serif'],  @tractor.extract(hash['in_reply_to'])]
       end
       return responds.delete_if{|respond| respond[0].nil? or respond[1].nil? }
     end

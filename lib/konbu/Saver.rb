@@ -40,7 +40,9 @@ module Konbu
 
     def readResponds(dbname)
       db = SQLite3::Database.new("./#{dbname}.db")
-      return db.execute("select response, targets from responds")
+      return (db.execute("select response, targets from responds")).map do |res|
+        res = [res[0], res[1].split(",")]
+      end
     end
 
   end
