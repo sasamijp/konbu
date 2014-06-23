@@ -35,7 +35,6 @@ module Konbu
 
     def learn(parsed)
       responds = []
-      p parsed
       parsed.each do |hash|
         next if hash['name'] != @name
         responds.push [hash['serif'],  @tractor.extract(hash['in_reply_to'])]

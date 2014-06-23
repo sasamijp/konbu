@@ -5,9 +5,9 @@ module Konbu
 
   class Saver
 
-    def newRespondDB(dbname)
+    def new_respond_db(dbname)
       db = SQLite3::Database.new("./#{dbname}.db")
-      sql = "
+      sql = '
       CREATE TABLE responds (
         response text,
         targets text
@@ -16,32 +16,29 @@ module Konbu
         name text,
         nameJP text
       );
-      "
+      '
       db.execute_batch(sql)
-      db.close()
     end
 
-    def insertResponds(dbname, responds)
+    def insert_responds(dbname, responds)
       db = SQLite3::Database.new("./#{dbname}.db")
       responds.each do |respond|
-        sql = "insert into responds values('#{respond[0]}', '#{respond[1].join(",")}')"
+        sql = "insert into responds values('#{respond[0]}', '#{respond[1].join(',')}')"
         db.execute(sql)
       end
-      db.close()
     end
 
-    def insertNames(dbname, *name)
+    def insert_names(dbname, *name)
       names = name
       db = SQLite3::Database.new("./#{dbname}.db")
       sql = "insert into info values('#{names[0]}', '#{names[1]}')"
       db.execute(sql)
-      db.close()
     end
 
-    def readResponds(dbname)
+    def read_responds(dbname)
       db = SQLite3::Database.new("./#{dbname}.db")
-      return (db.execute("select response, targets from responds")).map do |res|
-        res = [res[0], res[1].split(",")]
+      (db.execute('select response, targets from responds')).map do |res|
+        res = [res[0], res[1].split(',')]
       end
     end
 
