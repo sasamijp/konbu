@@ -6,17 +6,17 @@ require 'konbu/Saver'
 
 module Konbu
 
-  class AI
+  class Intelligence
 
-    def initialize(name, nameJP, responds)
+    def initialize(name, name_jp, responds)
       @tractor = KeywordExtractor.new
       @saver = Saver.new
       @responds = responds
       @name = name
-      @nameJP = nameJP
+      @name_jp = name_jp
     end
 
-    def addResponds(responds)
+    def add_responds(responds)
       responds.each do |respond|
         @responds << respond
       end
@@ -25,29 +25,29 @@ module Konbu
     def respond(text)
       input = @tractor.extract(text)
       return nil if input.nil?
-      hitwords = @responds.select{ |value| wordsMatch(value[1], input) != 0 }
-      hitwords.sort_by!{ |value| wordsMatch(value[1], input) }
+      hitwords = @responds.select{ |value| words_match(value[1], input) != 0 }
+      hitwords.sort_by!{ |value| words_match(value[1], input) }
       hitwords.map!{ |value| value = value[0] }
-      return hitwords[0]
+      hitwords[0]
     end
 
     def save
-      @saver.newRespondDB(@name)
-      @saver.insertNames(@name, @name, @nameJP)
-      @saver.insertResponds(@name, @responds)
+      @saver.new_respond_db(@name)
+      @saver.insert_names(@name, @name, @name_jp)
+      @saver.insert_responds(@name, @responds)
     end
 
     private
 
-    def wordsMatch(words1, words2)
+    def words_match(words1, words2)
+      return 0 if words1.length == 0
       match = 0
       words1.each do |word1|
         words2.each do |word2|
           match += 1 if word1 == word2
         end
       end
-      return 0 if words1.length == 0
-      return match.to_f/words1.length.to_f
+      match.to_f/words1.length.to_f
     end
 
   end
