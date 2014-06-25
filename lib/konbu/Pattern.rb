@@ -13,22 +13,22 @@ module Konbu
   class Pattern
 
     def initialize(name)
-      @urlCollector = URLcollector.new
+      @url_collector = URLCollector.new
       @parser = SSparser.new
       @tractor = KeywordExtractor.new
       @name = name
     end
 
-    def autoLearn(pagecount)
-      parsed = @parser.parseURLs(@urlCollector.collect(@name, pagecount))
+    def auto_learn(pagecount)
+      parsed = @parser.parse_urls(@url_collector.collect(@name, pagecount))
       return nil if parsed.nil?
-      return learn(parsed)
+      learn(parsed)
     end
 
-    def txtLearn(filename)
-      parsed = @parser.parseTXT(filename)
+    def txt_learn(filename)
+      parsed = @parser.parse_txt(filename)
       return nil if parsed.nil?
-      return learn(parsed)
+      learn(parsed)
     end
 
     private
@@ -39,7 +39,7 @@ module Konbu
         next if hash['name'] != @name
         responds.push [hash['serif'],  @tractor.extract(hash['in_reply_to'])]
       end
-      return responds.delete_if{|respond| respond[0].nil? or respond[1].nil? }
+      responds.delete_if{|respond| respond[0].nil? or respond[1].nil? }
     end
 
   end

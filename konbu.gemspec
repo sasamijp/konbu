@@ -1,4 +1,5 @@
 # coding: utf-8
+
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'konbu/version'
@@ -9,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["sasamijp"]
   spec.email         = ["k.seiya28@gmail.com"]
   spec.description   = %q{Conversation AI}
-  spec.summary       = %q{コンブセーションｗ}
+  spec.summary       = %q{yeah}
   spec.homepage      = "http://sasami.asia/"
   spec.license       = "WTFPL"
 

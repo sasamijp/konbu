@@ -23,7 +23,8 @@ module Konbu
     def insert_responds(dbname, responds)
       db = SQLite3::Database.new("./#{dbname}.db")
       responds.each do |respond|
-        sql = "insert into responds values('#{respond[0]}', '#{respond[1].join(',')}')"
+        sql = "insert into responds values('#{safe(respond[0])}', '#{safe(respond[1].join(','))}')"
+        p sql
         db.execute(sql)
       end
     end
@@ -37,9 +38,20 @@ module Konbu
 
     def read_responds(dbname)
       db = SQLite3::Database.new("./#{dbname}.db")
-      (db.execute('select response, targets from responds')).map do |res|
+      responds = (db.execute('select response, targets from responds')).map do |res|
         res = [res[0], res[1].split(',')]
       end
+      responds
+    end
+
+    private
+
+    def safe(str)
+      str.gsub("'", "")
+    end
+
+    def safe_data?(respond)
+
     end
 
   end
