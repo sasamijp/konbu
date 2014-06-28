@@ -1,4 +1,5 @@
-# coding: utf-8
+# -*- encoding: utf-8 -*-
+
 
 require 'sqlite3'
 require 'konbu/keywordExtractor'
@@ -24,8 +25,10 @@ module Konbu
 
     def respond(text)
       input = @tractor.extract(text)
+      p input
       return nil if input.nil?
       hitwords = @responds.select{ |value| words_match(value[1], input) != 0 }
+      #p hitwords
       hitwords.sort_by!{ |value| words_match(value[1], input) }
       hitwords.map!{ |value| value = value[0] }
       hitwords[0]

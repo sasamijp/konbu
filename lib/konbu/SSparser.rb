@@ -9,7 +9,8 @@ module Konbu
   class SSparser
 
     def parse_txt(filename)
-      body = File.read(filename, :encoding => Encoding::UTF_8)
+      body = File.open(filename, 'r:UTF-8').read
+      #p body.encoding
       body.gsub!('｢', '「')
       body.gsub!('『', '「')
       body.gsub!('｣', '」')
@@ -35,6 +36,7 @@ module Konbu
       in_reply_to = nil
       body.split("\n").each do |str|
         next if (!str.include?('「') and !str.include?('」')) or namespace?(str)
+        #p str.encoding
         hash = {
           'name' => who_talking(str),
           'serif' => extract_serif(str),

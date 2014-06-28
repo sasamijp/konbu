@@ -11,6 +11,7 @@ module Konbu
 
     def extract(str)
       return nil if str == nil
+      #p "wakati : #{wakati(str)}"
       join_words(wakati(str))
     end
 
@@ -28,9 +29,7 @@ module Konbu
       data = []
       nouns.each_with_index do |noun,l|
         next if l == 0
-        begin
-          data << [nouns[l-1]+noun, noun+nouns[l+1]]
-        rescue; break; end
+        data << ["#{nouns[l-1]}#{noun}", "#{noun}#{nouns[l+1]}"]
       end
       data.flatten
     end

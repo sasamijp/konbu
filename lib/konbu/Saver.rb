@@ -23,8 +23,9 @@ module Konbu
     def insert_responds(dbname, responds)
       db = SQLite3::Database.new("./#{dbname}.db")
       responds.each do |respond|
+        next unless data?(respond)
+        #puts respond[0]
         sql = "insert into responds values('#{safe(respond[0])}', '#{safe(respond[1].join(','))}')"
-        p sql
         db.execute(sql)
       end
     end
@@ -47,11 +48,11 @@ module Konbu
     private
 
     def safe(str)
-      str.gsub("'", "")
+      str.gsub("'", '')
     end
 
-    def safe_data?(respond)
-
+    def data?(respond)
+      !(respond[0] == '' or respond[1] == '')
     end
 
   end
