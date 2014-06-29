@@ -25,12 +25,12 @@ module Konbu
 
     def respond(text)
       input = @tractor.extract(text)
-      p input
+      #p input
       return nil if input.nil?
       hitwords = @responds.select{ |value| words_match(value[1], input) != 0 }
       #p hitwords
       hitwords.sort_by!{ |value| words_match(value[1], input) }
-      hitwords.map!{ |value| value = value[0] }
+      #hitwords.map!{ |value| value = value[0] }
       hitwords[0]
     end
 
@@ -50,7 +50,7 @@ module Konbu
           match += 1 if word1 == word2
         end
       end
-      match.to_f/words1.length.to_f
+      match
     end
 
   end

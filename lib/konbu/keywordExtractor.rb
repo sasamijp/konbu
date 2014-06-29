@@ -12,7 +12,7 @@ module Konbu
     def extract(str)
       return nil if str == nil
       #p "wakati : #{wakati(str)}"
-      join_words(wakati(str))
+      join_words(wakati(str))[0..-2]
     end
 
     private
